@@ -4,20 +4,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 
 class Square extends React.Component {
-  // setting the state allows to store the current value of the Square in this.state and change the value when the Square is clicked
-  // constructor initializes the state
-  constructor(props) {
-    // always use super when defining the constructor of a subclass!
-    super(props);
-    this.state = {
-      value: null,
-    };
-  }
-
   render() {
     return (
-      <button className="square" onClick={() => this.setState({ value: "X" })}>
-        {this.state.value}
+      <button className="square" onClick={() => this.props.onClick()}>
+        {this.props.value}
       </button>
     );
   }
@@ -31,7 +21,12 @@ class Board extends React.Component {
     };
   }
   renderSquare(i) {
-    return <Square value={this.state.squares[i]} />;
+    return (
+      <Square
+        value={this.state.squares[i]}
+        onClick={() => this.handleClick(i)}
+      />
+    );
   }
 
   render() {
